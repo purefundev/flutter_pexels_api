@@ -27,11 +27,11 @@ String photoUrl = photo.sources['original'].link
 String photoUrl = photo.get(ImageFormats.original);
 
 // search photos
-SearchResult<Photo> result = await client.searchPhotos(query,collection: Collection.Popular,page: 1,resultsPerPage:15);
+SearchResult<Photo> result = await client.searchPhotos(query,collection: PexelsCollection.Popular,page: 1,resultsPerPage:15);
 Photo photo = result[0]; // get the first photo found.
 
 // search portrait-only photos
-SearchResult<Photo> result = await client.searchPhotos(query,collection: Collection.Regular, orientation: PexelsPhotoOrientation.portait);
+SearchResult<Photo> result = await client.searchPhotos(query,collection: PexelsCollection.Regular, orientation: PexelsPhotoOrientation.portait);
 Photo photo = result[0]; // get the first photo found.
 
 
@@ -47,7 +47,7 @@ String videoUrl = video.sources[0].link;
 String videoUrl = video.get(0);
 
 // search videos
-SearchResult<Video> result = await client.searchVideos(query,collection: Collection.Regular,page: 1,resultsPerPage:15);
+SearchResult<Video> result = await client.searchVideos(query,collection: PexelsCollection.Regular,page: 1,resultsPerPage:15);
 Video video = result[0]; // get the first video found.
 
 

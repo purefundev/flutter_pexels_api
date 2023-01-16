@@ -95,7 +95,7 @@ class PexelsClient {
       id == null ? _getPhotoRandom() : _getPhotoFromID(id);
 
   Future<SearchResult<Photo?>?> searchPhotos(String query,
-      {Collection collection = Collection.Regular,
+      {PexelsCollection collection = PexelsCollection.Regular,
       int resultsPerPage = 15,
       int page = 1,
       PexelsPhotoOrientation? orientation}) async {
@@ -122,26 +122,26 @@ class PexelsClient {
   }
 
   String _getPhotoEndpoint(
-    Collection collection,
+    PexelsCollection collection,
     String query,
     int page,
     int resultsPerPage,
     PexelsPhotoOrientation? orientation,
   ) {
     switch (collection) {
-      case Collection.Curated:
+      case PexelsCollection.Curated:
         return Endpoints.photoSearchCurated(
           page: page,
           perPage: resultsPerPage,
           orientation: orientation,
         );
-      case Collection.Popular:
+      case PexelsCollection.Popular:
         return Endpoints.photoSearchPopular(
           page: page,
           perPage: resultsPerPage,
           orientation: orientation,
         );
-      case Collection.Regular: // fallback to default
+      case PexelsCollection.Regular: // fallback to default
       default:
         return Endpoints.photoSearch(
           query,
@@ -155,15 +155,15 @@ class PexelsClient {
   // Video
 
   String _getVideoEndpoint(
-      Collection collection, int page, int resultsPerPage, String query) {
+      PexelsCollection collection, int page, int resultsPerPage, String query) {
     switch (collection) {
-      case Collection.Curated:
+      case PexelsCollection.Curated:
         return Endpoints.videoSearchCurated(
             page: page, perPage: resultsPerPage);
-      case Collection.Popular:
+      case PexelsCollection.Popular:
         return Endpoints.videoSearchPopular(
             page: page, perPage: resultsPerPage);
-      case Collection.Regular: // fallback to default
+      case PexelsCollection.Regular: // fallback to default
       default:
         return Endpoints.videoSearch(query,
             page: page, perPage: resultsPerPage);
@@ -225,7 +225,7 @@ class PexelsClient {
       (id == null) ? _getVideoRandom() : _getVideoFromID(id);
 
   Future<SearchResult<Video?>?> searchVideos(String query,
-      {Collection collection = Collection.Regular,
+      {PexelsCollection collection = PexelsCollection.Regular,
       int resultsPerPage = 15,
       int page = 1,
       int? minWidth,

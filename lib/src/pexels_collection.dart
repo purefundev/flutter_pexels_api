@@ -1,1 +1,1 @@
-enum Collection { Regular, Curated, Popular }
+enum PexelsCollection { Regular, Curated, Popular }
