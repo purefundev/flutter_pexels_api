@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
+
+import 'package:http/http.dart' as http;
 
 import 'pexels_collection.dart';
 import 'pexels_endpoints.dart';
@@ -19,20 +20,16 @@ class PexelsClient {
   PexelsClient(this.apiKey);
 
   Future<String?> _getData(String url) async {
-    HttpClient client = new HttpClient();
-    var req = await client.getUrl(Uri.parse(url));
-    req.headers.add('Authorization', apiKey);
-    var resp = await req.close();
+    var resp = await http.get(Uri.parse(url), headers: {
+      'Authorization': apiKey,
+    });
+
     var data;
     if (resp.statusCode == 200) {
-      data = await resp
-          .transform(utf8.decoder)
-          .transform(const LineSplitter())
-          .single;
-      // update quota.
-      _quota = new Quota(
+      data = await resp.body;
+      _quota = Quota(
           remainingRequestsPerMonth:
-              int.tryParse(resp.headers.value('X-Ratelimit-Remaining')!));
+              int.tryParse(resp.headers['x-ratelimit-remaining'] ?? ''));
     }
 
     return data;
