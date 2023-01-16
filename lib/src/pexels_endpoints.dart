@@ -13,13 +13,13 @@ abstract class Endpoints {
   static String photoRandom() => Endpoints.photoSearchCurated(
       perPage: 1, page: 1 + math.Random().nextInt(1000));
 
-  static String photoSearch(String query, {perPage = 15, page = 1}) =>
-      '$_apiURLBase/$_apiURLPartPhoto/search?query=$query&per_page=$perPage&page=$page';
+  static String photoSearch(String query, {int perPage = 15, int page = 1}) =>
+      '$_apiURLBase/$_apiURLPartPhoto/search?query=${Uri.encodeQueryComponent(query)}&per_page=$perPage&page=$page';
 
-  static String photoSearchCurated({perPage = 15, page = 1}) =>
+  static String photoSearchCurated({int perPage = 15, int page = 1}) =>
       '$_apiURLBase/$_apiURLPartPhoto/curated?per_page=$perPage&page=$page';
 
-  static String photoSearchPopular({perPage = 15, page = 1}) =>
+  static String photoSearchPopular({int perPage = 15, int page = 1}) =>
       '$_apiURLBase/$_apiURLPartPhoto/popular?per_page=$perPage&page=$page';
 
   // Video Endpoints.
@@ -29,12 +29,12 @@ abstract class Endpoints {
 
   static String video(int id) => '$_apiURLBase/$_apiURLPartVideo/videos/$id';
 
-  static String videoSearch(String query, {perPage = 15, page = 1}) =>
-      '$_apiURLBase/$_apiURLPartVideo/search?query=$query&per_page=$perPage&page=$page';
+  static String videoSearch(String query, {int perPage = 15, int page = 1}) =>
+      '$_apiURLBase/$_apiURLPartVideo/search?query=${Uri.encodeQueryComponent(query)}&per_page=$perPage&page=$page';
 
-  static String videoSearchPopular({perPage = 15, page = 1}) =>
+  static String videoSearchPopular({int perPage = 15, int page = 1}) =>
       '$_apiURLBase/$_apiURLPartVideo/popular?per_page=$perPage&page=$page';
 
-  static String videoSearchCurated({perPage = 15, page = 1}) =>
+  static String videoSearchCurated({int perPage = 15, int page = 1}) =>
       '$_apiURLBase/$_apiURLPartVideo/popular?per_page=$perPage&page=$page';
 }
