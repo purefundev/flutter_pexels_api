@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'pexels_collection.dart';
 import 'pexels_endpoints.dart';
+import 'pexels_orientation.dart';
 import 'pexels_image_formats.dart';
 import 'pexels_photo.dart';
 import 'pexels_quota.dart';
@@ -96,8 +97,10 @@ class PexelsClient {
   Future<SearchResult<Photo?>?> searchPhotos(String query,
       {Collection collection = Collection.Regular,
       int resultsPerPage = 15,
-      int page = 1}) async {
-    var url = _getPhotoEndpoint(collection, query, page, resultsPerPage);
+      int page = 1,
+      PexelsPhotoOrientation? orientation}) async {
+    var url =
+        _getPhotoEndpoint(collection, query, page, resultsPerPage, orientation);
 
     String? data = await _getData(url);
 
@@ -119,18 +122,33 @@ class PexelsClient {
   }
 
   String _getPhotoEndpoint(
-      Collection collection, String query, int page, int resultsPerPage) {
+    Collection collection,
+    String query,
+    int page,
+    int resultsPerPage,
+    PexelsPhotoOrientation? orientation,
+  ) {
     switch (collection) {
       case Collection.Curated:
         return Endpoints.photoSearchCurated(
-            page: page, perPage: resultsPerPage);
+          page: page,
+          perPage: resultsPerPage,
+          orientation: orientation,
+        );
       case Collection.Popular:
         return Endpoints.photoSearchPopular(
-            page: page, perPage: resultsPerPage);
+          page: page,
+          perPage: resultsPerPage,
+          orientation: orientation,
+        );
       case Collection.Regular: // fallback to default
       default:
-        return Endpoints.photoSearch(query,
-            page: page, perPage: resultsPerPage);
+        return Endpoints.photoSearch(
+          query,
+          page: page,
+          perPage: resultsPerPage,
+          orientation: orientation,
+        );
     }
   }
 

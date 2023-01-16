@@ -30,6 +30,9 @@ String photoUrl = photo.get(ImageFormats.original);
 SearchResult<Photo> result = await client.searchPhotos(query,collection: Collection.Popular,page: 1,resultsPerPage:15);
 Photo photo = result[0]; // get the first photo found.
 
+// search portrait-only photos
+SearchResult<Photo> result = await client.searchPhotos(query,collection: Collection.Regular, orientation: PexelsPhotoOrientation.portait);
+Photo photo = result[0]; // get the first photo found.
 
 
 // get a video from ID
