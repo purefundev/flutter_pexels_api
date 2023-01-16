@@ -1,7 +1,7 @@
 import 'pexels_image_formats.dart';
 import 'pexels_sources.dart';
 
-class Photo {
+class PexelsPhoto {
   final int? id;
   final int? width;
   final int? height;
@@ -9,8 +9,8 @@ class Photo {
   final String? photographer;
   final String? photographerURL;
   final Map<String, PhotoSource> sources;
-  const Photo(this.id, this.width, this.height, this.url, this.photographer,
-      this.photographerURL, this.sources);
+  const PexelsPhoto(this.id, this.width, this.height, this.url,
+      this.photographer, this.photographerURL, this.sources);
 
   String? get(ImageFormats format) =>
       sources[format.toString().replaceAll('ImageFormats.', '')]!.link;

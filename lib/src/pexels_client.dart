@@ -42,7 +42,7 @@ class PexelsClient {
 
   // Photo
 
-  Future<Photo?> _getPhotoRandom() async {
+  Future<PexelsPhoto?> _getPhotoRandom() async {
     var url = Endpoints.photoRandom();
 
     String? data = await _getData(url);
@@ -56,7 +56,7 @@ class PexelsClient {
     return _buildPhoto(photoData);
   }
 
-  Future<Photo?> _getPhotoFromID(int id) async {
+  Future<PexelsPhoto?> _getPhotoFromID(int id) async {
     var url = Endpoints.photo(id);
 
     String? data = await _getData(url);
@@ -67,7 +67,7 @@ class PexelsClient {
     return _buildPhoto(photoData);
   }
 
-  Photo? _buildPhoto(photoData) {
+  PexelsPhoto? _buildPhoto(photoData) {
     // extract data
     var src = photoData['src'];
     if (src != null) {
@@ -77,7 +77,7 @@ class PexelsClient {
         sources[format] = PhotoSource(src[format]);
       });
 
-      return Photo(
+      return PexelsPhoto(
           photoData['id'],
           photoData['width'],
           photoData['height'],
@@ -91,10 +91,10 @@ class PexelsClient {
 
   /// [id] the id of the photo to return.
   /// if [id] is not specified, a random photo will be returned.
-  Future<Photo?> getPhoto({int? id}) async =>
+  Future<PexelsPhoto?> getPhoto({int? id}) async =>
       id == null ? _getPhotoRandom() : _getPhotoFromID(id);
 
-  Future<SearchResult<Photo?>?> searchPhotos(String query,
+  Future<SearchResult<PexelsPhoto?>?> searchPhotos(String query,
       {PexelsCollection collection = PexelsCollection.Regular,
       int resultsPerPage = 15,
       int page = 1,
@@ -112,7 +112,7 @@ class PexelsClient {
 
     if (photosData == null) return null;
 
-    var photos = <Photo?>[];
+    var photos = <PexelsPhoto?>[];
 
     for (dynamic photoData in photosData) {
       photos.add(_buildPhoto(photoData));
@@ -170,7 +170,7 @@ class PexelsClient {
     }
   }
 
-  Future<Video?> _getVideoRandom() async {
+  Future<PexelsVideo?> _getVideoRandom() async {
     var url = Endpoints.videoRandom();
 
     String? data = await _getData(url);
@@ -183,7 +183,7 @@ class PexelsClient {
     return _buildVideo(videoData);
   }
 
-  Future<Video?> _getVideoFromID(int id) async {
+  Future<PexelsVideo?> _getVideoFromID(int id) async {
     var url = Endpoints.video(id);
 
     String? data = await _getData(url);
@@ -194,7 +194,7 @@ class PexelsClient {
     return _buildVideo(videoData);
   }
 
-  Video? _buildVideo(videoData) {
+  PexelsVideo? _buildVideo(videoData) {
     var videoFilesData = videoData['video_files'];
 
     if (videoFilesData != null) {
@@ -207,7 +207,7 @@ class PexelsClient {
         videoFiles.add(videoSource);
       }
 
-      return Video(
+      return PexelsVideo(
           videoData['id'],
           videoData['width'],
           videoData['height'],
@@ -221,10 +221,10 @@ class PexelsClient {
     return null;
   }
 
-  Future<Video?> getVideo({int? id}) async =>
+  Future<PexelsVideo?> getVideo({int? id}) async =>
       (id == null) ? _getVideoRandom() : _getVideoFromID(id);
 
-  Future<SearchResult<Video?>?> searchVideos(String query,
+  Future<SearchResult<PexelsVideo?>?> searchVideos(String query,
       {PexelsCollection collection = PexelsCollection.Regular,
       int resultsPerPage = 15,
       int page = 1,
@@ -244,7 +244,7 @@ class PexelsClient {
 
     if (videosData == null) return null;
 
-    var videos = <Video?>[];
+    var videos = <PexelsVideo?>[];
 
     for (dynamic videoData in videosData) {
       videos.add(_buildVideo(videoData));

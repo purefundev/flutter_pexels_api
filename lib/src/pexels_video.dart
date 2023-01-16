@@ -1,6 +1,6 @@
 import 'pexels_sources.dart';
 
-class Video {
+class PexelsVideo {
   final int? id;
   final int? width;
   final int? height;
@@ -9,7 +9,7 @@ class Video {
   final String? fullRes;
   final int? duration;
   final List<VideoSource> sources;
-  const Video(this.id, this.width, this.height, this.url, this.image,
+  const PexelsVideo(this.id, this.width, this.height, this.url, this.image,
       this.fullRes, this.duration, this.sources);
 
   /// [index] : the index of the video file.
