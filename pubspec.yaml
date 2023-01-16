@@ -1,9 +1,8 @@
-name: pexels
-version: 0.1.2
+name: pexels_api
+version: 0.2.0
 description: Unofficial wrapper of Pexels REST API for the Dart Language.
-author: Kennedy Tochukwu Ekeoha <ekeohak@gmail.com>
-repository: https://github.com/xenoken/pexels
-homepage: https://github.com/xenoken/pexels
+repository: https://github.com/purefundev/flutter_pexels_api
+homepage: https://purefun.dev
 environment:
   sdk: '>=2.12.0 <3.0.0'
 dependencies:
