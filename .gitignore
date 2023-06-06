@@ -4,3 +4,4 @@ api_key.dart
 pubspec.lock
 doc/api/
 .idea/
+.DS_Store
